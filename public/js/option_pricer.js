@@ -10,7 +10,7 @@ app.controller("myCtrl", function($scope) {
 	$scope.params.strike=100.0;
 	$scope.params.time=1.0;
 	$scope.params.num_simulations=100000;
-	resources=[window.location.origin+"/resource/norm_dist.js"];
+	resources=[window.location.origin+"/libs/math/norm_dist.js"];
 	$scope.num_tasks=10;
 	func='sum=0;for (i=0;i<arg["num_simulations"];i++) {rnd=Math.exp(nrand()*arg["stdev"]*Math.sqrt(arg["time"])+arg["time"]*(arg["r"]-arg["stdev"]*arg["stdev"]/2.0))*arg["spot"];if(rnd>arg["strike"]) sum=sum+rnd-arg["strike"];}return ([arg["num_simulations"],Math.exp(-arg["r"]*arg["time"])*sum/arg["num_simulations"]]);';
 
