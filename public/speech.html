@@ -15,6 +15,7 @@
 			
 			recognition.onabort = function(){
 				$("#status").text("Didnt get it, tap again");
+				
 			}
 			recognition.onend = function(){
 				$("#status").text("Didnt get it, tap again");
@@ -71,7 +72,7 @@
 	</script>
 </head>
 
-<body style="margin:0px;height:100%;width:100%" onclick="speech();">
+<body style="font-size:16px;margin:0px;height:100%;width:100%" onclick="speech();">
 	<button style="margin:0px;background-color:lightyellow;color:blue;height:100%;width:100%"> <h1  id="status">Tap to start</h1> </button>
 	<a id="speech"></a>
 </body>
