@@ -1,0 +1,79 @@
+<html>
+<head>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+			  crossorigin="anonymous">
+	</script>
+	<script>
+				  
+
+		speech=function(){
+			var SpeechRecognition =  SpeechRecognition || SpeechRecognition || webkitSpeechRecognition
+			var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
+			var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
+			const recognition = new SpeechRecognition();
+			
+			recognition.onabort = function(){
+				$("#status").text("Didnt get it, tap again");
+			}
+			recognition.onend = function(){
+				$("#status").text("Didnt get it, tap again");
+			}
+			recognition.onresult = (event) => {
+			  const speechToText = event.results[0][0].transcript;
+			  //	$("#speech").text(speechToText);
+			  console.log(speechToText);
+			  
+			  translate_url="https://translation.googleapis.com/language/translate/v2?q="+speechToText.replace(' ','+')+"&target=en&key=AIzaSyCAusttPog9udmFSgIfh3MaxQwpqXMP4ko";
+			  $.get(translate_url,function(data,status){
+				if (status=="success"){
+					//data=JSON.parse(data);
+					console.log(data);
+					output=data["data"]["translations"][0]["translatedText"];
+					console.log(output);
+					$("#speech").text(output);
+					$("#status").text("Tap to speak again");
+					speak(unescape(output).replace("&#39;","'"),function(){});
+				}
+				else{
+					alert(status);
+				}
+				
+			  });
+			}
+			$("#status").text("Listening...");
+			recognition.start();
+		}
+		
+		
+		//speak('Jon likes Iced Tea!');
+ 
+		// say a message
+		function speak(text, callback) {
+			var u = new SpeechSynthesisUtterance();
+			u.text = text;
+			u.lang = 'en-US';
+		 
+			u.onend = function () {
+				if (callback) {
+					callback();
+				}
+			};
+		 
+			u.onerror = function (e) {
+				if (callback) {
+					callback(e);
+				}
+			};
+		 
+			speechSynthesis.speak(u);
+		}
+	</script>
+</head>
+
+<body style="margin:0px;height:100%;width:100%" onclick="speech();">
+	<button style="margin:0px;background-color:lightyellow;color:blue;height:100%;width:100%"> <h1  id="status">Tap to start</h1> </button>
+	<a id="speech"></a>
+</body>
+
+</html>
