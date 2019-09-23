@@ -15,7 +15,7 @@
     "express-favicon": "^2.0.0",
     "holepunch": "^1.0.0-alpha.2",
     "mongoose": "^5.0.7",
-    "morgan": "~1.9.0",
+    "morgan": "~1.9.1",
     "serve-favicon": "~2.4.5"
   }
 }
