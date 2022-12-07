@@ -11,7 +11,7 @@
     "dataframe-js": "^1.2.7",
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
-    "express": "~4.15.5",
+    "express": "~4.17.3",
     "express-favicon": "^2.0.0",
     "holepunch": "^1.0.0-alpha.2",
     "mongoose": "^5.0.7",
